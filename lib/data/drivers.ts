@@ -16,38 +16,38 @@ export interface Driver {
 }
 
 export const DRIVERS: Record<string, Driver> = {
-  "rajesh-kumar": {
-    id: "rajesh-kumar",
-    name: "Rajesh Kumar",
-    nameHindi: "राजेश कुमार",
-    phone: "+91 98290 12345",
-    whatsapp: "919829012345",
+  "bhanwar-lal-yadav": {
+    id: "bhanwar-lal-yadav",
+    name: "Bhanwar Lal Yadav",
+    nameHindi: "भंवर लाल यादव",
+    phone: "+91 9680345318",
+    whatsapp: "919680345318",
     experience: "10+ Years Professional Driving",
     experienceYears: 10,
     languages: ["Hindi", "English", "Rajasthani"],
     rating: 4.9,
     totalTrips: "1,500+",
-    photoUrl: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&q=80&w=600",
+    photoUrl: "/driver-owner.png",
     vehicleId: "veh-dzire-01",
     verifiedStatus: "Driver & Vehicle Details Available",
     location: "Jaipur, Rajasthan",
   },
-  "vikram-singh": {
-    id: "vikram-singh",
-    name: "Vikram Singh",
-    nameHindi: "विक्रम सिंह",
-    phone: "+91 98290 54321",
-    whatsapp: "919829054321",
-    experience: "8+ Years Intercity Specialist",
-    experienceYears: 8,
-    languages: ["Hindi", "English"],
-    rating: 4.85,
-    totalTrips: "1,200+",
-    photoUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=600",
-    vehicleId: "veh-ertiga-02",
+  "rajesh-kumar": {
+    id: "bhanwar-lal-yadav",
+    name: "Bhanwar Lal Yadav",
+    nameHindi: "भंवर लाल यादव",
+    phone: "+91 9680345318",
+    whatsapp: "919680345318",
+    experience: "10+ Years Professional Driving",
+    experienceYears: 10,
+    languages: ["Hindi", "English", "Rajasthani"],
+    rating: 4.9,
+    totalTrips: "1,500+",
+    photoUrl: "/driver-owner.png",
+    vehicleId: "veh-dzire-01",
     verifiedStatus: "Driver & Vehicle Details Available",
     location: "Jaipur, Rajasthan",
   }
 };
 
-export const DEFAULT_DRIVER = DRIVERS["rajesh-kumar"];
+export const DEFAULT_DRIVER = DRIVERS["bhanwar-lal-yadav"];

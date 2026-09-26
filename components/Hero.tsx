@@ -131,13 +131,13 @@ export default function Hero({ onBookClick, onViewCarsClick }: HeroProps) {
                   <div className="flex items-center gap-3">
                     <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-amber-400/60 shrink-0">
                       <img
-                        src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&q=80&w=200"
-                        alt="Driver राजेश कुमार"
-                        className="w-full h-full object-cover"
+                        src="/driver-owner.png"
+                        alt="Driver & Owner"
+                        className="w-full h-full object-cover object-top"
                       />
                     </div>
                     <div>
-                      <h4 className="text-sm font-bold text-white">Rajesh Kumar (राजेश कुमार)</h4>
+                      <h4 className="text-sm font-bold text-white">Bhanwar Lal Yadav (भंवर लाल यादव)</h4>
                       <p className="text-xs text-slate-400">10+ Years Experience • Sedan Cab</p>
                     </div>
                   </div>

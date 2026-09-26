@@ -39,7 +39,7 @@ export default function DriverProfile({ driver }: DriverProfileProps) {
             <img
               src={driver.photoUrl}
               alt={driver.name}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
             />
             <div className="absolute bottom-2 right-2 bg-emerald-500 text-slate-950 p-1 rounded-full">
               <CheckCircle2 className="w-4 h-4" />

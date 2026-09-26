@@ -93,7 +93,7 @@ export default function DriverCard({ driver, vehicle }: DriverCardProps) {
               <img
                 src={driver.photoUrl}
                 alt={driver.name}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover object-top"
               />
             </div>
             <div>
