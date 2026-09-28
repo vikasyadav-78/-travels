@@ -20,6 +20,8 @@ import FAQ from "@/components/FAQ";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import MobileBookingBar from "@/components/MobileBookingBar";
+import ScrollProgressBar from "@/components/ScrollProgressBar";
+import ScrollReveal from "@/components/ScrollReveal";
 
 import { DEFAULT_DRIVER } from "@/lib/data/drivers";
 import { DEFAULT_VEHICLE } from "@/lib/data/vehicles";
@@ -55,7 +57,10 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-slate-950 text-slate-100 flex flex-col relative">
+    <main className="min-h-screen bg-slate-50 text-slate-900 flex flex-col relative">
+      {/* Scroll Progress Bar & Floating Top Button */}
+      <ScrollProgressBar />
+
       {/* Cinematic Intro Animation Overlay */}
       <TravelIntro onComplete={() => setIntroCompleted(true)} />
 
@@ -72,19 +77,21 @@ export default function Home() {
       <QRBooking onBookClick={() => scrollToSection("booking")} />
 
       {/* Driver & Car Details Section */}
-      <section id="cars" className="py-20 bg-slate-950 relative">
+      <section id="cars" className="py-20 bg-slate-50 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-          <div className="text-center max-w-3xl mx-auto space-y-3">
-            <span className="text-xs font-bold text-amber-400 uppercase tracking-widest block">
-              Verified Ride Profile
-            </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white font-sans">
-              Driver & Vehicle Details
-            </h2>
-            <p className="text-slate-300 text-sm sm:text-base">
-              Know exactly who will drive you and what car you'll be riding in before placing a booking.
-            </p>
-          </div>
+          <ScrollReveal animation="fade-up" delay={100}>
+            <div className="text-center max-w-3xl mx-auto space-y-3">
+              <span className="text-xs font-bold text-amber-600 uppercase tracking-widest block">
+                Verified Ride Profile
+              </span>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 font-sans">
+                Driver & Vehicle Details
+              </h2>
+              <p className="text-slate-600 text-sm sm:text-base">
+                Know exactly who will drive you and what car you'll be riding in before placing a booking.
+              </p>
+            </div>
+          </ScrollReveal>
 
           <DriverProfile driver={DEFAULT_DRIVER} />
           <VehicleProfile vehicle={DEFAULT_VEHICLE} />
@@ -92,7 +99,7 @@ export default function Home() {
       </section>
 
       {/* Fare & Calculator Section */}
-      <section id="fare" className="py-20 bg-slate-900 relative">
+      <section id="fare" className="py-20 bg-white relative border-y border-slate-200/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           <FareOptions
             selectedType={selectedTripType}
@@ -112,7 +119,7 @@ export default function Home() {
       </section>
 
       {/* Booking Form Section */}
-      <section id="booking-section" className="py-20 bg-slate-950 relative">
+      <section id="booking-section" className="py-20 bg-slate-50 relative">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <BookingForm
             driver={DEFAULT_DRIVER}

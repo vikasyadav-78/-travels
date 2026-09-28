@@ -10,6 +10,8 @@ import FareCalculator from "@/components/FareCalculator";
 import BookingForm from "@/components/BookingForm";
 import Footer from "@/components/Footer";
 import MobileBookingBar from "@/components/MobileBookingBar";
+import ScrollProgressBar from "@/components/ScrollProgressBar";
+import ScrollReveal from "@/components/ScrollReveal";
 import { DRIVERS } from "@/lib/data/drivers";
 import { VEHICLES } from "@/lib/data/vehicles";
 import { QrCode, ArrowLeft } from "lucide-react";
@@ -41,50 +43,55 @@ export default function DriverPage({ params }: DriverPageProps) {
   };
 
   return (
-    <main className="min-h-screen bg-slate-950 text-slate-100 flex flex-col relative">
+    <main className="min-h-screen bg-slate-50 text-slate-900 flex flex-col relative">
+      <ScrollProgressBar />
       <TravelIntro onComplete={() => {}} />
 
       <Navbar onBookClick={() => scrollToSection("booking")} />
 
       {/* Driver-Specific Dedicated Header */}
-      <section className="pt-28 pb-12 bg-slate-900 border-b border-slate-800">
+      <section className="pt-28 pb-12 bg-white border-b border-slate-200/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
-          <div className="mb-6">
-            <Link
-              href="/"
-              className="inline-flex items-center gap-2 text-xs font-bold text-amber-400 hover:text-amber-300 transition-colors"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              <span>Back to Shri Kabariya Balaji Travels Home</span>
-            </Link>
-          </div>
-
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-            <div className="space-y-2">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-semibold">
-                <QrCode className="w-4 h-4" />
-                <span>Driver-Specific Direct Booking Page</span>
-              </div>
-              <h1 className="text-3xl sm:text-4xl font-black text-white">
-                Book Ride With {driver.name}
-              </h1>
-              <p className="text-slate-300 text-sm">
-                Vehicle: <strong className="text-white">{vehicle.name}</strong> ({vehicle.regNumber})
-              </p>
+          <ScrollReveal animation="fade-down" delay={100}>
+            <div className="mb-6">
+              <Link
+                href="/"
+                className="inline-flex items-center gap-2 text-xs font-extrabold text-amber-700 hover:text-amber-800 transition-colors hover:scale-105"
+              >
+                <ArrowLeft className="w-4 h-4" />
+                <span>Back to Shri Kabariya Balaji Travels Home</span>
+              </Link>
             </div>
+          </ScrollReveal>
 
-            <div className="flex items-center gap-2">
-              <div className="px-4 py-2 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-300">
-                <span className="text-slate-400 block">Rating</span>
-                <span className="text-sm font-bold text-amber-400">★ {driver.rating} / 5.0</span>
+          <ScrollReveal animation="fade-up" delay={200}>
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+              <div className="space-y-2">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100 border border-amber-300 text-amber-900 text-xs font-bold">
+                  <QrCode className="w-4 h-4 text-amber-600 animate-pulse" />
+                  <span>Driver-Specific Direct Booking Page</span>
+                </div>
+                <h1 className="text-3xl sm:text-4xl font-black text-slate-900">
+                  Book Ride With {driver.name}
+                </h1>
+                <p className="text-slate-600 text-sm font-medium">
+                  Vehicle: <strong className="text-slate-900 font-bold">{vehicle.name}</strong> ({vehicle.regNumber})
+                </p>
               </div>
-              <div className="px-4 py-2 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-300">
-                <span className="text-slate-400 block">Location</span>
-                <span className="text-sm font-bold text-white">{driver.location}</span>
+
+              <div className="flex items-center gap-2">
+                <div className="px-4 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-600">
+                  <span className="text-slate-500 block font-medium">Rating</span>
+                  <span className="text-sm font-extrabold text-amber-600">★ {driver.rating} / 5.0</span>
+                </div>
+                <div className="px-4 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-600">
+                  <span className="text-slate-500 block font-medium">Location</span>
+                  <span className="text-sm font-extrabold text-slate-900">{driver.location}</span>
+                </div>
               </div>
             </div>
-          </div>
+          </ScrollReveal>
 
         </div>
       </section>
@@ -98,16 +105,18 @@ export default function DriverPage({ params }: DriverPageProps) {
       </section>
 
       {/* Live Calculator & Booking Form */}
-      <section className="py-16 bg-slate-900 border-t border-slate-800">
+      <section className="py-16 bg-white border-t border-slate-200/80">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-          <div className="text-center space-y-2">
-            <h2 className="text-2xl sm:text-3xl font-black text-white">
-              Calculate & Book Direct
-            </h2>
-            <p className="text-slate-400 text-xs sm:text-sm">
-              Instant fare estimation and WhatsApp lead submission
-            </p>
-          </div>
+          <ScrollReveal animation="fade-up" delay={100}>
+            <div className="text-center space-y-2">
+              <h2 className="text-2xl sm:text-3xl font-black text-slate-900">
+                Calculate & Book Direct
+              </h2>
+              <p className="text-slate-600 text-xs sm:text-sm font-medium">
+                Instant fare estimation and WhatsApp lead submission
+              </p>
+            </div>
+          </ScrollReveal>
 
           <FareCalculator />
 

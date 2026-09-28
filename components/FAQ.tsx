@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ChevronDown, HelpCircle } from "lucide-react";
+import ScrollReveal from "@/components/ScrollReveal";
 
 export default function FAQ() {
   const [openIdx, setOpenIdx] = useState<number | null>(0);
@@ -34,51 +35,54 @@ export default function FAQ() {
   ];
 
   return (
-    <section id="faq" className="py-20 bg-slate-950 text-white relative">
+    <section id="faq" className="py-20 bg-white text-slate-900 relative border-b border-slate-200/80">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
-        <div className="text-center mb-16 space-y-3">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs sm:text-sm font-semibold">
-            <HelpCircle className="w-4 h-4" />
-            <span>Got Questions?</span>
-          </div>
+        <ScrollReveal animation="fade-up" delay={100}>
+          <div className="text-center mb-16 space-y-3">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-100/80 border border-amber-300 text-amber-900 text-xs sm:text-sm font-bold shadow-xs hover:scale-105 transition-transform">
+              <HelpCircle className="w-4 h-4 text-amber-600 animate-pulse" />
+              <span>Got Questions?</span>
+            </div>
 
-          <h2 className="text-3xl sm:text-4xl font-black text-white font-sans">
-            Frequently Asked Questions
-          </h2>
-          <p className="text-slate-300 text-sm">
-            Everything you need to know about our rates, policies, and booking process.
-          </p>
-        </div>
+            <h2 className="text-3xl sm:text-4xl font-black text-slate-900 font-sans">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-slate-600 text-sm">
+              Everything you need to know about our rates, policies, and booking process.
+            </p>
+          </div>
+        </ScrollReveal>
 
         {/* Accordion List */}
         <div className="space-y-4">
           {faqs.map((faq, idx) => {
             const isOpen = openIdx === idx;
             return (
-              <div
-                key={idx}
-                className="bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden transition-all duration-200"
-              >
-                <button
-                  onClick={() => setOpenIdx(isOpen ? null : idx)}
-                  className="w-full py-4 px-6 text-left font-bold text-sm sm:text-base text-white flex items-center justify-between gap-4 hover:text-amber-400 transition-colors"
+              <ScrollReveal key={idx} animation="fade-up" delay={150 + idx * 70}>
+                <div
+                  className="bg-slate-50 rounded-2xl border border-slate-200 overflow-hidden transition-all duration-300 shadow-sm hover:border-amber-300"
                 >
-                  <span>{faq.q}</span>
-                  <ChevronDown
-                    className={`w-5 h-5 text-amber-400 shrink-0 transition-transform duration-300 ${
-                      isOpen ? "rotate-180" : ""
-                    }`}
-                  />
-                </button>
+                  <button
+                    onClick={() => setOpenIdx(isOpen ? null : idx)}
+                    className="w-full py-4 px-6 text-left font-bold text-sm sm:text-base text-slate-900 flex items-center justify-between gap-4 hover:text-amber-700 transition-colors"
+                  >
+                    <span>{faq.q}</span>
+                    <ChevronDown
+                      className={`w-5 h-5 text-amber-600 shrink-0 transition-transform duration-300 ${
+                        isOpen ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
 
-                {isOpen && (
-                  <div className="px-6 pb-5 pt-1 text-xs sm:text-sm text-slate-300 leading-relaxed border-t border-slate-800/80 animate-in fade-in duration-200">
-                    {faq.a}
-                  </div>
-                )}
-              </div>
+                  {isOpen && (
+                    <div className="px-6 pb-5 pt-1 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-200 transition-all duration-300">
+                      {faq.a}
+                    </div>
+                  )}
+                </div>
+              </ScrollReveal>
             );
           })}
         </div>

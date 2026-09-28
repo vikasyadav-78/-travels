@@ -1,6 +1,7 @@
 "use client";
 
 import { ShieldCheck, UserCheck, Calculator, MessageSquare, PhoneCall, FileText } from "lucide-react";
+import ScrollReveal from "@/components/ScrollReveal";
 
 export default function WhyChooseUs() {
   const reasons = [
@@ -37,41 +38,44 @@ export default function WhyChooseUs() {
   ];
 
   return (
-    <section id="why-us" className="py-20 bg-slate-900 text-white relative">
+    <section id="why-us" className="py-20 bg-slate-50 text-slate-900 relative border-b border-slate-200/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-          <span className="text-xs font-bold text-amber-400 uppercase tracking-widest block">
-            Why Shri Kabariya Balaji Travels
-          </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white font-sans">
-            Why Travel With Us?
-          </h2>
-          <p className="text-slate-300 text-base">
-            We focus on honest pricing, direct relationships, and clear communication for every journey.
-          </p>
-        </div>
+        <ScrollReveal animation="fade-up" delay={100}>
+          <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
+            <span className="text-xs font-bold text-amber-600 uppercase tracking-widest block">
+              Why Shri Kabariya Balaji Travels
+            </span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 font-sans">
+              Why Travel With Us?
+            </h2>
+            <p className="text-slate-600 text-base">
+              We focus on honest pricing, direct relationships, and clear communication for every journey.
+            </p>
+          </div>
+        </ScrollReveal>
 
         {/* Features Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {reasons.map((item, idx) => {
             const Icon = item.icon;
             return (
-              <div
-                key={idx}
-                className="bg-slate-950/80 rounded-3xl p-6 border border-slate-800 hover:border-amber-500/40 transition-all duration-300 space-y-3 group"
-              >
-                <div className="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 group-hover:scale-105 transition-transform">
-                  <Icon className="w-6 h-6 stroke-[2]" />
+              <ScrollReveal key={idx} animation="zoom-in" delay={150 + idx * 80}>
+                <div
+                  className="bg-white rounded-3xl p-6 border border-slate-200 hover:border-amber-400 transition-all duration-300 space-y-3 group shadow-sm hover:shadow-xl hover:-translate-y-1.5 h-full card-hover-effect"
+                >
+                  <div className="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-600 group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300">
+                    <Icon className="w-6 h-6 stroke-[2]" />
+                  </div>
+                  <h3 className="text-lg font-bold text-slate-900 group-hover:text-amber-700 transition-colors">
+                    {item.title}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    {item.desc}
+                  </p>
                 </div>
-                <h3 className="text-lg font-bold text-white group-hover:text-amber-300 transition-colors">
-                  {item.title}
-                </h3>
-                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                  {item.desc}
-                </p>
-              </div>
+              </ScrollReveal>
             );
           })}
         </div>

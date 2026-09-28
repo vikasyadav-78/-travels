@@ -22,6 +22,7 @@ import { submitBookingToGoogleSheets } from "@/lib/googleSheets";
 import BookingSuccess from "./BookingSuccess";
 import { Driver } from "@/lib/data/drivers";
 import { Vehicle } from "@/lib/data/vehicles";
+import ScrollReveal from "@/components/ScrollReveal";
 
 interface BookingFormProps {
   driver?: Driver;
@@ -159,447 +160,449 @@ export default function BookingForm({
   }
 
   return (
-    <div id="booking" className="bg-slate-900 rounded-3xl p-6 sm:p-8 border-2 border-amber-500/40 shadow-2xl text-white relative">
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-800 pb-5 mb-6 gap-4">
-        <div>
-          <span className="text-xs font-bold text-amber-400 uppercase tracking-widest block">
-            Direct Cab Booking System
-          </span>
-          <h3 className="text-2xl font-black text-white font-sans mt-0.5">
-            Book Your Journey
-          </h3>
-        </div>
+    <ScrollReveal animation="fade-up" delay={150}>
+      <div id="booking" className="bg-white rounded-3xl p-6 sm:p-8 border-2 border-amber-500/40 shadow-2xl text-slate-900 relative card-hover-effect">
+        {/* Header */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-200 pb-5 mb-6 gap-4">
+          <div>
+            <span className="text-xs font-bold text-amber-600 uppercase tracking-widest block">
+              Direct Cab Booking System
+            </span>
+            <h3 className="text-2xl font-black text-slate-900 font-sans mt-0.5">
+              Book Your Journey
+            </h3>
+          </div>
 
-        {/* Step Progress Indicator */}
-        <div className="flex items-center gap-2">
-          {[1, 2, 3].map((s) => (
-            <div
-              key={s}
-              className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold transition-all ${
-                step === s
-                  ? "bg-amber-500 text-slate-950 shadow-md shadow-amber-500/20"
-                  : step > s
-                  ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/40"
-                  : "bg-slate-800 text-slate-400 border border-slate-700"
-              }`}
-            >
-              <span>Step {s}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <form onSubmit={handleSubmitBooking}>
-        
-        {/* STEP 1: CHOOSE YOUR TRIP */}
-        {step === 1 && (
-          <div className="space-y-6 animate-in fade-in duration-200">
-            <h4 className="text-lg font-bold text-white flex items-center gap-2">
-              <span className="w-6 h-6 rounded-full bg-amber-500 text-slate-950 text-xs font-black flex items-center justify-center">
-                1
-              </span>
-              <span>Choose Your Trip Option</span>
-            </h4>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {/* Option 1 Pill */}
+          {/* Step Progress Indicator */}
+          <div className="flex items-center gap-2">
+            {[1, 2, 3].map((s) => (
               <div
-                onClick={() => setTripType("per_km")}
-                className={`p-5 rounded-2xl cursor-pointer border-2 transition-all ${
-                  tripType === "per_km"
-                    ? "bg-slate-950 border-amber-500 shadow-lg ring-1 ring-amber-500/30"
-                    : "bg-slate-950/60 border-slate-800 hover:border-slate-700"
+                key={s}
+                className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold transition-all duration-300 ${
+                  step === s
+                    ? "bg-amber-500 text-slate-950 shadow-md shadow-amber-500/20 scale-105"
+                    : step > s
+                    ? "bg-emerald-100 text-emerald-800 border border-emerald-300"
+                    : "bg-slate-100 text-slate-500 border border-slate-300"
                 }`}
               >
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-sm font-bold text-white">Option 1: Per Kilometer</span>
-                  <div className="w-5 h-5 rounded-full border border-amber-500 flex items-center justify-center">
-                    {tripType === "per_km" && <div className="w-2.5 h-2.5 rounded-full bg-amber-400" />}
-                  </div>
-                </div>
-                <p className="text-xs text-slate-400 mb-3">₹13/KM (up to 250 KM) • ₹14/KM (above 250 KM)</p>
-                <span className="text-[11px] font-bold text-amber-400 bg-amber-500/10 px-2 py-1 rounded">
-                  Best for point-to-point trips
-                </span>
+                <span>Step {s}</span>
               </div>
-
-              {/* Option 2 Pill */}
-              <div
-                onClick={() => setTripType("fixed_day")}
-                className={`p-5 rounded-2xl cursor-pointer border-2 transition-all ${
-                  tripType === "fixed_day"
-                    ? "bg-slate-950 border-amber-500 shadow-lg ring-1 ring-amber-500/30"
-                    : "bg-slate-950/60 border-slate-800 hover:border-slate-700"
-                }`}
-              >
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-sm font-bold text-white">Option 2: Fixed Day Package</span>
-                  <div className="w-5 h-5 rounded-full border border-amber-500 flex items-center justify-center">
-                    {tripType === "fixed_day" && <div className="w-2.5 h-2.5 rounded-full bg-amber-400" />}
-                  </div>
-                </div>
-                <p className="text-xs text-slate-400 mb-3">₹2,000 / Day (Cab & Driver Charge)</p>
-                <span className="text-[11px] font-bold text-blue-400 bg-blue-500/10 px-2 py-1 rounded">
-                  Best for full day / multiple stops
-                </span>
-              </div>
-            </div>
-
-            <div className="pt-4 flex justify-end">
-              <button
-                type="button"
-                onClick={handleNextStep}
-                className="px-8 py-3.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-400 text-slate-950 font-black text-sm flex items-center gap-2 shadow-lg shadow-amber-500/20 active:scale-95 transition-all"
-              >
-                <span>Continue to Journey Details</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
-            </div>
+            ))}
           </div>
-        )}
+        </div>
 
-        {/* STEP 2: JOURNEY DETAILS */}
-        {step === 2 && (
-          <div className="space-y-6 animate-in fade-in duration-200">
-            <h4 className="text-lg font-bold text-white flex items-center gap-2">
-              <span className="w-6 h-6 rounded-full bg-amber-500 text-slate-950 text-xs font-black flex items-center justify-center">
-                2
-              </span>
-              <span>Enter Journey Details</span>
-            </h4>
+        <form onSubmit={handleSubmitBooking}>
+          
+          {/* STEP 1: CHOOSE YOUR TRIP */}
+          {step === 1 && (
+            <div className="space-y-6 transition-all duration-300">
+              <h4 className="text-lg font-bold text-slate-900 flex items-center gap-2">
+                <span className="w-6 h-6 rounded-full bg-amber-500 text-slate-950 text-xs font-black flex items-center justify-center">
+                  1
+                </span>
+                <span>Choose Your Trip Option</span>
+              </h4>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              
-              {/* Customer Name */}
-              <div>
-                <label className="text-xs font-bold text-slate-300 uppercase tracking-wider block mb-1.5">
-                  Customer Name *
-                </label>
-                <div className="relative">
-                  <User className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" />
-                  <input
-                    type="text"
-                    placeholder="e.g. Vikas Yadav"
-                    value={customerName}
-                    onChange={(e) => setCustomerName(e.target.value)}
-                    className={`w-full pl-10 pr-4 py-3 bg-slate-950 border rounded-xl text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 ${
-                      errors.customerName ? "border-red-500" : "border-slate-800"
-                    }`}
-                  />
-                </div>
-                {errors.customerName && (
-                  <p className="text-xs text-red-400 mt-1 flex items-center gap-1">
-                    <AlertCircle className="w-3 h-3" /> {errors.customerName}
-                  </p>
-                )}
-              </div>
-
-              {/* Mobile Number */}
-              <div>
-                <label className="text-xs font-bold text-slate-300 uppercase tracking-wider block mb-1.5">
-                  Mobile Number *
-                </label>
-                <div className="relative">
-                  <Phone className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" />
-                  <input
-                    type="tel"
-                    placeholder="e.g. 98290XXXXX"
-                    value={mobile}
-                    onChange={(e) => setMobile(e.target.value)}
-                    className={`w-full pl-10 pr-4 py-3 bg-slate-950 border rounded-xl text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 ${
-                      errors.mobile ? "border-red-500" : "border-slate-800"
-                    }`}
-                  />
-                </div>
-                {errors.mobile && (
-                  <p className="text-xs text-red-400 mt-1 flex items-center gap-1">
-                    <AlertCircle className="w-3 h-3" /> {errors.mobile}
-                  </p>
-                )}
-              </div>
-
-              {/* Pickup Location */}
-              <div>
-                <label className="text-xs font-bold text-slate-300 uppercase tracking-wider block mb-1.5">
-                  Pickup Location *
-                </label>
-                <div className="relative">
-                  <MapPin className="w-4 h-4 text-amber-400 absolute left-3.5 top-3.5" />
-                  <input
-                    type="text"
-                    placeholder="e.g. Jaipur Railway Station"
-                    value={pickupLocation}
-                    onChange={(e) => setPickupLocation(e.target.value)}
-                    className={`w-full pl-10 pr-4 py-3 bg-slate-950 border rounded-xl text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 ${
-                      errors.pickupLocation ? "border-red-500" : "border-slate-800"
-                    }`}
-                  />
-                </div>
-                {errors.pickupLocation && (
-                  <p className="text-xs text-red-400 mt-1 flex items-center gap-1">
-                    <AlertCircle className="w-3 h-3" /> {errors.pickupLocation}
-                  </p>
-                )}
-              </div>
-
-              {/* Drop Location */}
-              <div>
-                <label className="text-xs font-bold text-slate-300 uppercase tracking-wider block mb-1.5">
-                  Drop Location *
-                </label>
-                <div className="relative">
-                  <MapPin className="w-4 h-4 text-emerald-400 absolute left-3.5 top-3.5" />
-                  <input
-                    type="text"
-                    placeholder="e.g. Delhi IGI Airport T3"
-                    value={dropLocation}
-                    onChange={(e) => setDropLocation(e.target.value)}
-                    className={`w-full pl-10 pr-4 py-3 bg-slate-950 border rounded-xl text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 ${
-                      errors.dropLocation ? "border-red-500" : "border-slate-800"
-                    }`}
-                  />
-                </div>
-                {errors.dropLocation && (
-                  <p className="text-xs text-red-400 mt-1 flex items-center gap-1">
-                    <AlertCircle className="w-3 h-3" /> {errors.dropLocation}
-                  </p>
-                )}
-              </div>
-
-              {/* Travel Date */}
-              <div>
-                <label className="text-xs font-bold text-slate-300 uppercase tracking-wider block mb-1.5">
-                  Travel Date *
-                </label>
-                <div className="relative">
-                  <Calendar className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" />
-                  <input
-                    type="date"
-                    value={travelDate}
-                    onChange={(e) => setTravelDate(e.target.value)}
-                    className={`w-full pl-10 pr-4 py-3 bg-slate-950 border rounded-xl text-sm text-white focus:outline-none focus:border-amber-500 ${
-                      errors.travelDate ? "border-red-500" : "border-slate-800"
-                    }`}
-                  />
-                </div>
-                {errors.travelDate && (
-                  <p className="text-xs text-red-400 mt-1 flex items-center gap-1">
-                    <AlertCircle className="w-3 h-3" /> {errors.travelDate}
-                  </p>
-                )}
-              </div>
-
-              {/* Pickup Time */}
-              <div>
-                <label className="text-xs font-bold text-slate-300 uppercase tracking-wider block mb-1.5">
-                  Pickup Time *
-                </label>
-                <div className="relative">
-                  <Clock className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" />
-                  <input
-                    type="text"
-                    placeholder="e.g. 06:00 AM"
-                    value={pickupTime}
-                    onChange={(e) => setPickupTime(e.target.value)}
-                    className={`w-full pl-10 pr-4 py-3 bg-slate-950 border rounded-xl text-sm text-white focus:outline-none focus:border-amber-500 ${
-                      errors.pickupTime ? "border-red-500" : "border-slate-800"
-                    }`}
-                  />
-                </div>
-                {errors.pickupTime && (
-                  <p className="text-xs text-red-400 mt-1 flex items-center gap-1">
-                    <AlertCircle className="w-3 h-3" /> {errors.pickupTime}
-                  </p>
-                )}
-              </div>
-
-              {/* Number of Passengers */}
-              <div>
-                <label className="text-xs font-bold text-slate-300 uppercase tracking-wider block mb-1.5">
-                  Passengers
-                </label>
-                <div className="relative">
-                  <Users className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" />
-                  <select
-                    value={passengers}
-                    onChange={(e) => setPassengers(parseInt(e.target.value))}
-                    className="w-full pl-10 pr-4 py-3 bg-slate-950 border border-slate-800 rounded-xl text-sm text-white focus:outline-none focus:border-amber-500"
-                  >
-                    <option value={1}>1 Person</option>
-                    <option value={2}>2 Persons</option>
-                    <option value={3}>3 Persons</option>
-                    <option value={4}>4 Persons (Full Sedan)</option>
-                    <option value={5}>5 Persons (SUV Request)</option>
-                    <option value={6}>6 Persons (Full SUV)</option>
-                  </select>
-                </div>
-              </div>
-
-              {/* Distance or Days field depending on option */}
-              {tripType === "per_km" ? (
-                <div>
-                  <label className="text-xs font-bold text-slate-300 uppercase tracking-wider block mb-1.5">
-                    Estimated Distance (KM) *
-                  </label>
-                  <div className="relative">
-                    <Navigation className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" />
-                    <input
-                      type="number"
-                      min="1"
-                      placeholder="e.g. 270"
-                      value={distanceKm}
-                      onChange={(e) => setDistanceKm(parseInt(e.target.value) || 0)}
-                      className={`w-full pl-10 pr-4 py-3 bg-slate-950 border rounded-xl text-sm text-white focus:outline-none focus:border-amber-500 ${
-                        errors.distanceKm ? "border-red-500" : "border-slate-800"
-                      }`}
-                    />
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {/* Option 1 Pill */}
+                <div
+                  onClick={() => setTripType("per_km")}
+                  className={`p-5 rounded-2xl cursor-pointer border-2 transition-all duration-300 hover:scale-[1.02] ${
+                    tripType === "per_km"
+                      ? "bg-amber-50/50 border-amber-500 shadow-md ring-1 ring-amber-400/30"
+                      : "bg-slate-50 border-slate-200 hover:border-slate-300"
+                  }`}
+                >
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-sm font-bold text-slate-900">Option 1: Per Kilometer</span>
+                    <div className="w-5 h-5 rounded-full border border-amber-500 flex items-center justify-center">
+                      {tripType === "per_km" && <div className="w-2.5 h-2.5 rounded-full bg-amber-500 animate-ping" />}
+                    </div>
                   </div>
-                  {errors.distanceKm && (
-                    <p className="text-xs text-red-400 mt-1 flex items-center gap-1">
-                      <AlertCircle className="w-3 h-3" /> {errors.distanceKm}
-                    </p>
-                  )}
+                  <p className="text-xs text-slate-600 mb-3">₹13/KM (up to 250 KM) • ₹14/KM (above 250 KM)</p>
+                  <span className="text-[11px] font-bold text-amber-800 bg-amber-100 px-2 py-1 rounded">
+                    Best for point-to-point trips
+                  </span>
                 </div>
-              ) : (
-                <div>
-                  <label className="text-xs font-bold text-slate-300 uppercase tracking-wider block mb-1.5">
-                    Number of Days *
-                  </label>
-                  <div className="relative">
-                    <Calendar className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" />
-                    <input
-                      type="number"
-                      min="1"
-                      placeholder="e.g. 2"
-                      value={numberOfDays}
-                      onChange={(e) => setNumberOfDays(parseInt(e.target.value) || 1)}
-                      className={`w-full pl-10 pr-4 py-3 bg-slate-950 border rounded-xl text-sm text-white focus:outline-none focus:border-amber-500 ${
-                        errors.numberOfDays ? "border-red-500" : "border-slate-800"
-                      }`}
-                    />
+
+                {/* Option 2 Pill */}
+                <div
+                  onClick={() => setTripType("fixed_day")}
+                  className={`p-5 rounded-2xl cursor-pointer border-2 transition-all duration-300 hover:scale-[1.02] ${
+                    tripType === "fixed_day"
+                      ? "bg-amber-50/50 border-amber-500 shadow-md ring-1 ring-amber-400/30"
+                      : "bg-slate-50 border-slate-200 hover:border-slate-300"
+                  }`}
+                >
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-sm font-bold text-slate-900">Option 2: Fixed Day Package</span>
+                    <div className="w-5 h-5 rounded-full border border-amber-500 flex items-center justify-center">
+                      {tripType === "fixed_day" && <div className="w-2.5 h-2.5 rounded-full bg-amber-500 animate-ping" />}
+                    </div>
                   </div>
-                  {errors.numberOfDays && (
-                    <p className="text-xs text-red-400 mt-1 flex items-center gap-1">
-                      <AlertCircle className="w-3 h-3" /> {errors.numberOfDays}
-                    </p>
-                  )}
-                </div>
-              )}
-
-            </div>
-
-            <div className="pt-4 flex items-center justify-between">
-              <button
-                type="button"
-                onClick={handlePrevStep}
-                className="px-5 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-sm flex items-center gap-2 border border-slate-700"
-              >
-                <ArrowLeft className="w-4 h-4" />
-                <span>Back</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={handleNextStep}
-                className="px-8 py-3.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-400 text-slate-950 font-black text-sm flex items-center gap-2 shadow-lg shadow-amber-500/20 active:scale-95 transition-all"
-              >
-                <span>View Fare Summary</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* STEP 3: FARE SUMMARY & CONFIRMATION */}
-        {step === 3 && (
-          <div className="space-y-6 animate-in fade-in duration-200">
-            <h4 className="text-lg font-bold text-white flex items-center gap-2">
-              <span className="w-6 h-6 rounded-full bg-amber-500 text-slate-950 text-xs font-black flex items-center justify-center">
-                3
-              </span>
-              <span>Review Fare Summary & Send Request</span>
-            </h4>
-
-            {/* Summary Box */}
-            <div className="bg-slate-950 p-6 rounded-2xl border border-slate-800 space-y-4">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
-                <div>
-                  <span className="text-slate-400 block">Customer Name:</span>
-                  <span className="font-bold text-white text-sm">{customerName}</span>
-                </div>
-                <div>
-                  <span className="text-slate-400 block">Mobile Number:</span>
-                  <span className="font-bold text-amber-400 text-sm">{mobile}</span>
-                </div>
-                <div>
-                  <span className="text-slate-400 block">Pickup Location:</span>
-                  <span className="font-semibold text-white">{pickupLocation}</span>
-                </div>
-                <div>
-                  <span className="text-slate-400 block">Drop Location:</span>
-                  <span className="font-semibold text-white">{dropLocation}</span>
-                </div>
-                <div>
-                  <span className="text-slate-400 block">Date & Time:</span>
-                  <span className="font-semibold text-white">{travelDate} @ {pickupTime}</span>
-                </div>
-                <div>
-                  <span className="text-slate-400 block">Trip Type:</span>
-                  <span className="font-bold text-amber-400">
-                    {tripType === "per_km" ? `Per KM (${distanceKm} KM)` : `Fixed Day (${numberOfDays} Days)`}
+                  <p className="text-xs text-slate-600 mb-3">₹2,000 / Day (Cab & Driver Charge)</p>
+                  <span className="text-[11px] font-bold text-blue-800 bg-blue-100 px-2 py-1 rounded">
+                    Best for full day / multiple stops
                   </span>
                 </div>
               </div>
 
-              <div className="pt-4 border-t border-slate-800 flex items-center justify-between">
+              <div className="pt-4 flex justify-end">
+                <button
+                  type="button"
+                  onClick={handleNextStep}
+                  className="px-8 py-3.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black text-sm flex items-center gap-2 shadow-lg shadow-amber-500/20 active:scale-95 transition-all hover:scale-105"
+                >
+                  <span>Continue to Journey Details</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* STEP 2: JOURNEY DETAILS */}
+          {step === 2 && (
+            <div className="space-y-6 transition-all duration-300">
+              <h4 className="text-lg font-bold text-slate-900 flex items-center gap-2">
+                <span className="w-6 h-6 rounded-full bg-amber-500 text-slate-950 text-xs font-black flex items-center justify-center">
+                  2
+                </span>
+                <span>Enter Journey Details</span>
+              </h4>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                
+                {/* Customer Name */}
                 <div>
-                  <span className="text-xs text-slate-400 block">Applicable Rate: {fareResult.rateFormatted}</span>
-                  <span className="text-xs font-bold text-slate-300">Calculation: {fareResult.breakdownText}</span>
+                  <label className="text-xs font-extrabold text-slate-700 uppercase tracking-wider block mb-1.5">
+                    Customer Name *
+                  </label>
+                  <div className="relative">
+                    <User className="w-4 h-4 text-slate-500 absolute left-3.5 top-3.5" />
+                    <input
+                      type="text"
+                      placeholder="e.g. Vikas Yadav"
+                      value={customerName}
+                      onChange={(e) => setCustomerName(e.target.value)}
+                      className={`w-full pl-10 pr-4 py-3 bg-slate-50 border rounded-xl text-sm text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-amber-500 transition-colors ${
+                        errors.customerName ? "border-red-500" : "border-slate-300"
+                      }`}
+                    />
+                  </div>
+                  {errors.customerName && (
+                    <p className="text-xs text-red-600 mt-1 flex items-center gap-1">
+                      <AlertCircle className="w-3 h-3" /> {errors.customerName}
+                    </p>
+                  )}
                 </div>
-                <div className="text-right">
-                  <span className="text-xs text-slate-400 block uppercase font-bold">Estimated Fare</span>
-                  <span className="text-3xl font-black text-amber-400">{fareResult.estimatedFareFormatted}</span>
+
+                {/* Mobile Number */}
+                <div>
+                  <label className="text-xs font-extrabold text-slate-700 uppercase tracking-wider block mb-1.5">
+                    Mobile Number *
+                  </label>
+                  <div className="relative">
+                    <Phone className="w-4 h-4 text-slate-500 absolute left-3.5 top-3.5" />
+                    <input
+                      type="tel"
+                      placeholder="e.g. 98290XXXXX"
+                      value={mobile}
+                      onChange={(e) => setMobile(e.target.value)}
+                      className={`w-full pl-10 pr-4 py-3 bg-slate-50 border rounded-xl text-sm text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-amber-500 transition-colors ${
+                        errors.mobile ? "border-red-500" : "border-slate-300"
+                      }`}
+                    />
+                  </div>
+                  {errors.mobile && (
+                    <p className="text-xs text-red-600 mt-1 flex items-center gap-1">
+                      <AlertCircle className="w-3 h-3" /> {errors.mobile}
+                    </p>
+                  )}
                 </div>
-              </div>
 
-              <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 text-xs text-amber-300">
-                <strong>Notice:</strong> {fareResult.additionalChargesNote}
-              </div>
-            </div>
+                {/* Pickup Location */}
+                <div>
+                  <label className="text-xs font-extrabold text-slate-700 uppercase tracking-wider block mb-1.5">
+                    Pickup Location *
+                  </label>
+                  <div className="relative">
+                    <MapPin className="w-4 h-4 text-amber-600 absolute left-3.5 top-3.5" />
+                    <input
+                      type="text"
+                      placeholder="e.g. Jaipur Railway Station"
+                      value={pickupLocation}
+                      onChange={(e) => setPickupLocation(e.target.value)}
+                      className={`w-full pl-10 pr-4 py-3 bg-slate-50 border rounded-xl text-sm text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-amber-500 transition-colors ${
+                        errors.pickupLocation ? "border-red-500" : "border-slate-300"
+                      }`}
+                    />
+                  </div>
+                  {errors.pickupLocation && (
+                    <p className="text-xs text-red-600 mt-1 flex items-center gap-1">
+                      <AlertCircle className="w-3 h-3" /> {errors.pickupLocation}
+                    </p>
+                  )}
+                </div>
 
-            <div className="pt-2 flex items-center justify-between">
-              <button
-                type="button"
-                onClick={handlePrevStep}
-                className="px-5 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-sm flex items-center gap-2 border border-slate-700"
-              >
-                <ArrowLeft className="w-4 h-4" />
-                <span>Edit Details</span>
-              </button>
+                {/* Drop Location */}
+                <div>
+                  <label className="text-xs font-extrabold text-slate-700 uppercase tracking-wider block mb-1.5">
+                    Drop Location *
+                  </label>
+                  <div className="relative">
+                    <MapPin className="w-4 h-4 text-emerald-600 absolute left-3.5 top-3.5" />
+                    <input
+                      type="text"
+                      placeholder="e.g. Delhi IGI Airport T3"
+                      value={dropLocation}
+                      onChange={(e) => setDropLocation(e.target.value)}
+                      className={`w-full pl-10 pr-4 py-3 bg-slate-50 border rounded-xl text-sm text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-amber-500 transition-colors ${
+                        errors.dropLocation ? "border-red-500" : "border-slate-300"
+                      }`}
+                    />
+                  </div>
+                  {errors.dropLocation && (
+                    <p className="text-xs text-red-600 mt-1 flex items-center gap-1">
+                      <AlertCircle className="w-3 h-3" /> {errors.dropLocation}
+                    </p>
+                  )}
+                </div>
 
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="px-8 py-4 rounded-xl bg-gradient-to-r from-emerald-500 via-emerald-400 to-emerald-500 hover:from-emerald-400 hover:to-emerald-500 text-slate-950 font-black text-base shadow-xl shadow-emerald-500/25 flex items-center gap-2 active:scale-95 transition-all disabled:opacity-50"
-              >
-                {isSubmitting ? (
-                  <>
-                    <Loader2 className="w-5 h-5 animate-spin" />
-                    <span>Processing Request...</span>
-                  </>
+                {/* Travel Date */}
+                <div>
+                  <label className="text-xs font-extrabold text-slate-700 uppercase tracking-wider block mb-1.5">
+                    Travel Date *
+                  </label>
+                  <div className="relative">
+                    <Calendar className="w-4 h-4 text-slate-500 absolute left-3.5 top-3.5" />
+                    <input
+                      type="date"
+                      value={travelDate}
+                      onChange={(e) => setTravelDate(e.target.value)}
+                      className={`w-full pl-10 pr-4 py-3 bg-slate-50 border rounded-xl text-sm text-slate-900 focus:bg-white focus:outline-none focus:border-amber-500 transition-colors ${
+                        errors.travelDate ? "border-red-500" : "border-slate-300"
+                      }`}
+                    />
+                  </div>
+                  {errors.travelDate && (
+                    <p className="text-xs text-red-600 mt-1 flex items-center gap-1">
+                      <AlertCircle className="w-3 h-3" /> {errors.travelDate}
+                    </p>
+                  )}
+                </div>
+
+                {/* Pickup Time */}
+                <div>
+                  <label className="text-xs font-extrabold text-slate-700 uppercase tracking-wider block mb-1.5">
+                    Pickup Time *
+                  </label>
+                  <div className="relative">
+                    <Clock className="w-4 h-4 text-slate-500 absolute left-3.5 top-3.5" />
+                    <input
+                      type="text"
+                      placeholder="e.g. 06:00 AM"
+                      value={pickupTime}
+                      onChange={(e) => setPickupTime(e.target.value)}
+                      className={`w-full pl-10 pr-4 py-3 bg-slate-50 border rounded-xl text-sm text-slate-900 focus:bg-white focus:outline-none focus:border-amber-500 transition-colors ${
+                        errors.pickupTime ? "border-red-500" : "border-slate-300"
+                      }`}
+                    />
+                  </div>
+                  {errors.pickupTime && (
+                    <p className="text-xs text-red-600 mt-1 flex items-center gap-1">
+                      <AlertCircle className="w-3 h-3" /> {errors.pickupTime}
+                    </p>
+                  )}
+                </div>
+
+                {/* Number of Passengers */}
+                <div>
+                  <label className="text-xs font-extrabold text-slate-700 uppercase tracking-wider block mb-1.5">
+                    Passengers
+                  </label>
+                  <div className="relative">
+                    <Users className="w-4 h-4 text-slate-500 absolute left-3.5 top-3.5" />
+                    <select
+                      value={passengers}
+                      onChange={(e) => setPassengers(parseInt(e.target.value))}
+                      className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-sm text-slate-900 focus:bg-white focus:outline-none focus:border-amber-500 transition-colors"
+                    >
+                      <option value={1}>1 Person</option>
+                      <option value={2}>2 Persons</option>
+                      <option value={3}>3 Persons</option>
+                      <option value={4}>4 Persons (Full Sedan)</option>
+                      <option value={5}>5 Persons (SUV Request)</option>
+                      <option value={6}>6 Persons (Full SUV)</option>
+                    </select>
+                  </div>
+                </div>
+
+                {/* Distance or Days field depending on option */}
+                {tripType === "per_km" ? (
+                  <div>
+                    <label className="text-xs font-extrabold text-slate-700 uppercase tracking-wider block mb-1.5">
+                      Estimated Distance (KM) *
+                    </label>
+                    <div className="relative">
+                      <Navigation className="w-4 h-4 text-slate-500 absolute left-3.5 top-3.5" />
+                      <input
+                        type="number"
+                        min="1"
+                        placeholder="e.g. 270"
+                        value={distanceKm}
+                        onChange={(e) => setDistanceKm(parseInt(e.target.value) || 0)}
+                        className={`w-full pl-10 pr-4 py-3 bg-slate-50 border rounded-xl text-sm text-slate-900 focus:bg-white focus:outline-none focus:border-amber-500 transition-colors ${
+                          errors.distanceKm ? "border-red-500" : "border-slate-300"
+                        }`}
+                      />
+                    </div>
+                    {errors.distanceKm && (
+                      <p className="text-xs text-red-600 mt-1 flex items-center gap-1">
+                        <AlertCircle className="w-3 h-3" /> {errors.distanceKm}
+                      </p>
+                    )}
+                  </div>
                 ) : (
-                  <>
-                    <CheckCircle2 className="w-5 h-5" />
-                    <span>Send Booking Request</span>
-                  </>
+                  <div>
+                    <label className="text-xs font-extrabold text-slate-700 uppercase tracking-wider block mb-1.5">
+                      Number of Days *
+                    </label>
+                    <div className="relative">
+                      <Calendar className="w-4 h-4 text-slate-500 absolute left-3.5 top-3.5" />
+                      <input
+                        type="number"
+                        min="1"
+                        placeholder="e.g. 2"
+                        value={numberOfDays}
+                        onChange={(e) => setNumberOfDays(parseInt(e.target.value) || 1)}
+                        className={`w-full pl-10 pr-4 py-3 bg-slate-50 border rounded-xl text-sm text-slate-900 focus:bg-white focus:outline-none focus:border-amber-500 transition-colors ${
+                          errors.numberOfDays ? "border-red-500" : "border-slate-300"
+                        }`}
+                      />
+                    </div>
+                    {errors.numberOfDays && (
+                      <p className="text-xs text-red-600 mt-1 flex items-center gap-1">
+                        <AlertCircle className="w-3 h-3" /> {errors.numberOfDays}
+                      </p>
+                    )}
+                  </div>
                 )}
-              </button>
-            </div>
-          </div>
-        )}
 
-      </form>
-    </div>
+              </div>
+
+              <div className="pt-4 flex items-center justify-between">
+                <button
+                  type="button"
+                  onClick={handlePrevStep}
+                  className="px-5 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-sm flex items-center gap-2 border border-slate-300 transition-all hover:scale-105"
+                >
+                  <ArrowLeft className="w-4 h-4" />
+                  <span>Back</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={handleNextStep}
+                  className="px-8 py-3.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black text-sm flex items-center gap-2 shadow-lg shadow-amber-500/20 active:scale-95 transition-all hover:scale-105"
+                >
+                  <span>View Fare Summary</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* STEP 3: FARE SUMMARY & CONFIRMATION */}
+          {step === 3 && (
+            <div className="space-y-6 transition-all duration-300">
+              <h4 className="text-lg font-bold text-slate-900 flex items-center gap-2">
+                <span className="w-6 h-6 rounded-full bg-amber-500 text-slate-950 text-xs font-black flex items-center justify-center">
+                  3
+                </span>
+                <span>Review Fare Summary & Send Request</span>
+              </h4>
+
+              {/* Summary Box */}
+              <div className="bg-slate-50 p-6 rounded-2xl border border-slate-200 space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+                  <div>
+                    <span className="text-slate-500 block font-medium">Customer Name:</span>
+                    <span className="font-bold text-slate-900 text-sm">{customerName}</span>
+                  </div>
+                  <div>
+                    <span className="text-slate-500 block font-medium">Mobile Number:</span>
+                    <span className="font-bold text-amber-700 text-sm">{mobile}</span>
+                  </div>
+                  <div>
+                    <span className="text-slate-500 block font-medium">Pickup Location:</span>
+                    <span className="font-semibold text-slate-900">{pickupLocation}</span>
+                  </div>
+                  <div>
+                    <span className="text-slate-500 block font-medium">Drop Location:</span>
+                    <span className="font-semibold text-slate-900">{dropLocation}</span>
+                  </div>
+                  <div>
+                    <span className="text-slate-500 block font-medium">Date & Time:</span>
+                    <span className="font-semibold text-slate-900">{travelDate} @ {pickupTime}</span>
+                  </div>
+                  <div>
+                    <span className="text-slate-500 block font-medium">Trip Type:</span>
+                    <span className="font-bold text-amber-700">
+                      {tripType === "per_km" ? `Per KM (${distanceKm} KM)` : `Fixed Day (${numberOfDays} Days)`}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="pt-4 border-t border-slate-200 flex items-center justify-between">
+                  <div>
+                    <span className="text-xs text-slate-600 block">Applicable Rate: {fareResult.rateFormatted}</span>
+                    <span className="text-xs font-bold text-slate-700">Calculation: {fareResult.breakdownText}</span>
+                  </div>
+                  <div className="text-right">
+                    <span className="text-xs text-slate-500 block uppercase font-bold">Estimated Fare</span>
+                    <span className="text-3xl font-black text-amber-600 animate-pulse">{fareResult.estimatedFareFormatted}</span>
+                  </div>
+                </div>
+
+                <div className="p-3 rounded-xl bg-amber-100/80 border border-amber-300 text-xs text-amber-900">
+                  <strong>Notice:</strong> {fareResult.additionalChargesNote}
+                </div>
+              </div>
+
+              <div className="pt-2 flex items-center justify-between">
+                <button
+                  type="button"
+                  onClick={handlePrevStep}
+                  className="px-5 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-sm flex items-center gap-2 border border-slate-300 transition-all hover:scale-105"
+                >
+                  <ArrowLeft className="w-4 h-4" />
+                  <span>Edit Details</span>
+                </button>
+
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="px-8 py-4 rounded-xl bg-gradient-to-r from-emerald-600 via-emerald-500 to-emerald-600 hover:from-emerald-500 hover:to-emerald-600 text-white font-black text-base shadow-xl shadow-emerald-600/25 flex items-center gap-2 active:scale-95 transition-all duration-300 hover:scale-105 disabled:opacity-50"
+                >
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="w-5 h-5 animate-spin" />
+                      <span>Processing Request...</span>
+                    </>
+                  ) : (
+                    <>
+                      <CheckCircle2 className="w-5 h-5" />
+                      <span>Send Booking Request</span>
+                    </>
+                  )}
+                </button>
+              </div>
+            </div>
+          )}
+
+        </form>
+      </div>
+    </ScrollReveal>
   );
 }
