@@ -137,11 +137,8 @@ export default function BookingForm({
       vehicleNumber: vehicle?.regNumber,
     };
 
-    // 1. Submit to Google Sheets (non-blocking webhook call)
+    // Submit to Google Sheets API / Webhook
     await submitBookingToGoogleSheets(payload);
-
-    // 2. Trigger WhatsApp Pre-filled message link
-    openWhatsAppBooking(payload);
 
     setIsSubmitting(false);
     setBookingSubmittedPayload(payload);
@@ -306,9 +303,10 @@ export default function BookingForm({
                     <Phone className="w-4 h-4 text-slate-500 absolute left-3.5 top-3.5" />
                     <input
                       type="tel"
+                      maxLength={10}
                       placeholder="e.g. 98290XXXXX"
                       value={mobile}
-                      onChange={(e) => setMobile(e.target.value)}
+                      onChange={(e) => setMobile(e.target.value.replace(/[^0-9]/g, "").slice(0, 10))}
                       className={`w-full pl-10 pr-4 py-3 bg-slate-50 border rounded-xl text-sm text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-amber-500 transition-colors ${
                         errors.mobile ? "border-red-500" : "border-slate-300"
                       }`}
@@ -392,22 +390,68 @@ export default function BookingForm({
                   )}
                 </div>
 
-                {/* Pickup Time */}
+                {/* Pickup Time Select Dropdown */}
                 <div>
                   <label className="text-xs font-extrabold text-slate-700 uppercase tracking-wider block mb-1.5">
                     Pickup Time *
                   </label>
                   <div className="relative">
-                    <Clock className="w-4 h-4 text-slate-500 absolute left-3.5 top-3.5" />
-                    <input
-                      type="text"
-                      placeholder="e.g. 06:00 AM"
+                    <Clock className="w-4 h-4 text-amber-600 absolute left-3.5 top-3.5 pointer-events-none z-10" />
+                    <select
                       value={pickupTime}
                       onChange={(e) => setPickupTime(e.target.value)}
-                      className={`w-full pl-10 pr-4 py-3 bg-slate-50 border rounded-xl text-sm text-slate-900 focus:bg-white focus:outline-none focus:border-amber-500 transition-colors ${
+                      className={`w-full pl-10 pr-8 py-3 bg-slate-50 border rounded-xl text-sm text-slate-900 focus:bg-white focus:outline-none focus:border-amber-500 transition-colors cursor-pointer ${
                         errors.pickupTime ? "border-red-500" : "border-slate-300"
                       }`}
-                    />
+                    >
+                      {[
+                        "04:00 AM (Early Morning)",
+                        "04:30 AM",
+                        "05:00 AM",
+                        "05:30 AM",
+                        "06:00 AM",
+                        "06:30 AM",
+                        "07:00 AM",
+                        "07:30 AM",
+                        "08:00 AM",
+                        "08:30 AM",
+                        "09:00 AM",
+                        "09:30 AM",
+                        "10:00 AM",
+                        "10:30 AM",
+                        "11:00 AM",
+                        "11:30 AM",
+                        "12:00 PM (Noon)",
+                        "12:30 PM",
+                        "01:00 PM",
+                        "01:30 PM",
+                        "02:00 PM",
+                        "02:30 PM",
+                        "03:00 PM",
+                        "03:30 PM",
+                        "04:00 PM",
+                        "04:30 PM",
+                        "05:00 PM",
+                        "05:30 PM",
+                        "06:00 PM",
+                        "06:30 PM",
+                        "07:00 PM",
+                        "07:30 PM",
+                        "08:00 PM",
+                        "08:30 PM",
+                        "09:00 PM",
+                        "09:30 PM",
+                        "10:00 PM",
+                        "10:30 PM",
+                        "11:00 PM",
+                        "11:30 PM",
+                        "12:00 AM (Midnight)",
+                      ].map((t) => (
+                        <option key={t} value={t}>
+                          ⏰ {t}
+                        </option>
+                      ))}
+                    </select>
                   </div>
                   {errors.pickupTime && (
                     <p className="text-xs text-red-600 mt-1 flex items-center gap-1">

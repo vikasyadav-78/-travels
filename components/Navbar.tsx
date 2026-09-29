@@ -54,8 +54,12 @@ export default function Navbar({ onBookClick }: NavbarProps) {
         <div className="flex items-center justify-between">
           {/* Logo / Brand */}
           <Link href="/" className="flex items-center gap-2.5 group">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-amber-600 flex items-center justify-center text-slate-950 shadow-md shadow-amber-500/20 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
-              <Car className="w-6 h-6 stroke-[2.5]" />
+            <div className="w-10 h-10 rounded-xl overflow-hidden border border-amber-500/50 shadow-md shadow-amber-500/20 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
+              <img
+                src="/hanuman-logo.jpg"
+                alt="Shri Kabariya Balaji Logo"
+                className="w-full h-full object-cover"
+              />
             </div>
             <div className="flex flex-col">
               <span className="font-extrabold text-lg sm:text-xl text-slate-900 tracking-tight leading-none font-sans group-hover:text-amber-600 transition-colors">

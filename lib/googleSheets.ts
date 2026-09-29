@@ -48,14 +48,13 @@ export async function submitBookingToGoogleSheets(
   };
 
   try {
-    // Google Apps Script requires no-cors or JSON POST. Using standard POST with fallback.
-    const response = await fetch(webhookUrl, {
+    // Send payload to Google Apps Script Web App
+    await fetch(webhookUrl, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "text/plain;charset=utf-8",
       },
       body: JSON.stringify(payload),
-      mode: "no-cors", // Ensures standard Google Apps Script Web App compatibility without CORS block
     });
 
     return {

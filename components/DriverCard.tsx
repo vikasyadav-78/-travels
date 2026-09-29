@@ -32,15 +32,20 @@ export default function DriverCard({ driver, vehicle }: DriverCardProps) {
           <div className="absolute -right-8 -bottom-8 w-40 h-40 bg-amber-500/10 rounded-full blur-xl pointer-events-none" />
           
           <div className="flex items-center justify-between border-b border-slate-800 pb-3 mb-4">
-            <div>
-              <h3 className="font-extrabold text-base text-white">
-                {CONFIG.BUSINESS_NAME_HI}
-              </h3>
-              <p className="text-[11px] text-amber-400 font-medium">
-                {CONFIG.BUSINESS_NAME_EN}
-              </p>
+            <div className="flex items-center gap-2.5">
+              <div className="w-9 h-9 rounded-lg overflow-hidden border border-amber-500/60 shadow-md shrink-0">
+                <img src="/hanuman-logo.jpg" alt="Logo" className="w-full h-full object-cover" />
+              </div>
+              <div>
+                <h3 className="font-extrabold text-sm text-white">
+                  {CONFIG.BUSINESS_NAME_HI}
+                </h3>
+                <p className="text-[10px] text-amber-400 font-medium">
+                  {CONFIG.BUSINESS_NAME_EN}
+                </p>
+              </div>
             </div>
-            <span className="text-[10px] font-bold uppercase bg-amber-500/20 text-amber-300 px-2.5 py-1 rounded border border-amber-500/30">
+            <span className="text-[10px] font-bold uppercase bg-amber-500/20 text-amber-300 px-2 py-1 rounded border border-amber-500/30">
               Direct Cab Booking
             </span>
           </div>

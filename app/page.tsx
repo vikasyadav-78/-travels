@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import TravelIntro from "@/components/TravelIntro";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
@@ -10,6 +10,7 @@ import VehicleProfile from "@/components/VehicleProfile";
 import FareOptions from "@/components/FareOptions";
 import FareCalculator from "@/components/FareCalculator";
 import BookingForm from "@/components/BookingForm";
+import BookingModal from "@/components/BookingModal";
 import Services from "@/components/Services";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import HowItWorks from "@/components/HowItWorks";
@@ -32,6 +33,17 @@ export default function Home() {
   const [calculatedKm, setCalculatedKm] = useState<number>(270);
   const [calculatedDays, setCalculatedDays] = useState<number>(2);
   const [introCompleted, setIntroCompleted] = useState(false);
+  const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+
+  // Automatically open Booking Popup Modal shortly after vehicle intro animation completes
+  useEffect(() => {
+    if (introCompleted) {
+      const timer = setTimeout(() => {
+        setIsBookingModalOpen(true);
+      }, 1200);
+      return () => clearTimeout(timer);
+    }
+  }, [introCompleted]);
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -49,11 +61,15 @@ export default function Home() {
     }
   };
 
+  const openBookingModal = (tripType?: TripType, km?: number, days?: number) => {
+    if (tripType) setSelectedTripType(tripType);
+    if (km) setCalculatedKm(km);
+    if (days) setCalculatedDays(days);
+    setIsBookingModalOpen(true);
+  };
+
   const handleApplyFareToBooking = (type: TripType, km: number, days: number) => {
-    setSelectedTripType(type);
-    setCalculatedKm(km);
-    setCalculatedDays(days);
-    scrollToSection("booking");
+    openBookingModal(type, km, days);
   };
 
   return (
@@ -65,16 +81,16 @@ export default function Home() {
       <TravelIntro onComplete={() => setIntroCompleted(true)} />
 
       {/* Main Website Content */}
-      <Navbar onBookClick={() => scrollToSection("booking")} />
+      <Navbar onBookClick={() => openBookingModal()} />
 
       {/* Hero Section */}
       <Hero
-        onBookClick={() => scrollToSection("booking")}
+        onBookClick={() => openBookingModal()}
         onViewCarsClick={() => scrollToSection("cars")}
       />
 
       {/* QR Code Concept Section */}
-      <QRBooking onBookClick={() => scrollToSection("booking")} />
+      <QRBooking onBookClick={() => openBookingModal()} />
 
       {/* Driver & Car Details Section */}
       <section id="cars" className="py-20 bg-slate-50 relative">
@@ -105,7 +121,7 @@ export default function Home() {
             selectedType={selectedTripType}
             onSelectType={(type) => {
               setSelectedTripType(type);
-              scrollToSection("fare-calculator");
+              openBookingModal(type);
             }}
           />
 
@@ -132,7 +148,7 @@ export default function Home() {
       </section>
 
       {/* Services Section */}
-      <Services onBookClick={() => scrollToSection("booking")} />
+      <Services onBookClick={() => openBookingModal()} />
 
       {/* Why Choose Us */}
       <WhyChooseUs />
@@ -153,13 +169,22 @@ export default function Home() {
       <FAQ />
 
       {/* Contact Section */}
-      <Contact onBookClick={() => scrollToSection("booking")} />
+      <Contact onBookClick={() => openBookingModal()} />
 
       {/* Footer */}
       <Footer />
 
       {/* Sticky Mobile Booking Bar */}
-      <MobileBookingBar onBookClick={() => scrollToSection("booking")} />
+      <MobileBookingBar onBookClick={() => openBookingModal()} />
+
+      {/* Popup Modal for Instant Booking */}
+      <BookingModal
+        isOpen={isBookingModalOpen}
+        onClose={() => setIsBookingModalOpen(false)}
+        initialTripType={selectedTripType}
+        initialDistance={calculatedKm}
+        initialDays={calculatedDays}
+      />
     </main>
   );
 }
