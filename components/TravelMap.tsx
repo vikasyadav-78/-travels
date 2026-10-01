@@ -1,150 +1,156 @@
 "use client";
 
 import React from "react";
-import AnimatedRoute from "./AnimatedRoute";
-import AnimatedCar from "./AnimatedCar";
+import { Car, MapPin, ShieldCheck, Navigation, Sparkles } from "lucide-react";
+import { CONFIG } from "@/lib/config";
 
 interface TravelMapProps {
   progress: number; // 0 to 1
 }
 
 export default function TravelMap({ progress }: TravelMapProps) {
-  // SVG Route Path coordinates for Jaipur -> Ajmer -> Udaipur -> Rajasthan -> Delhi Highway
-  const mainRoutePath =
-    "M 180 340 C 260 290, 320 310, 420 230 C 500 160, 580 180, 680 140 C 760 110, 840 130, 920 90";
+  const percentage = Math.round(progress * 100);
 
-  // Cities mapping with relative SVG coordinates
-  const cities = [
-    { name: "Jaipur (HQ)", x: 420, y: 230, main: true },
-    { name: "Delhi", x: 920, y: 90, main: true },
-    { name: "Ajmer", x: 320, y: 310, main: false },
-    { name: "Udaipur", x: 180, y: 340, main: false },
-    { name: "Jodhpur", x: 220, y: 240, main: false },
+  // Milestones along the road
+  const milestones = [
+    { name: "Jaipur (HQ)", pos: 10 },
+    { name: "Ajmer", pos: 35 },
+    { name: "Khatu Shyam", pos: 60 },
+    { name: "Delhi", pos: 88 },
   ];
 
   return (
     <div className="relative w-full h-full flex items-center justify-center overflow-hidden bg-slate-950">
-      {/* Perspective Grid Background */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,#1e3a8a_0%,#030712_70%)] opacity-80 pointer-events-none" />
-      <div
-        className="absolute inset-0 opacity-15 pointer-events-none"
-        style={{
-          backgroundImage:
-            "linear-gradient(to right, #38bdf8 1px, transparent 1px), linear-gradient(to bottom, #38bdf8 1px, transparent 1px)",
-          backgroundSize: "40px 40px",
-        }}
-      />
-
-      {/* SVG Map Container */}
-      <svg
-        viewBox="0 0 1000 500"
-        className="w-full h-full max-w-6xl max-h-[85vh] object-contain relative z-10 filter drop-shadow-2xl"
-      >
-        <defs>
-          {/* Subtle Map Fill Gradient */}
-          <linearGradient id="mapFill" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#0f172a" stopOpacity="0.8" />
-            <stop offset="100%" stopColor="#1e293b" stopOpacity="0.6" />
-          </linearGradient>
-
-          {/* City Glow Filter */}
-          <filter id="glowPin" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation="4" result="blur" />
-            <feMerge>
-              <feMergeNode in="blur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
-        </defs>
-
-        {/* India Map Silhouette Backdrop */}
-        <path
-          d="M 120 420 C 80 350, 100 220, 200 120 C 350 50, 600 30, 850 60 C 950 150, 940 300, 850 420 C 700 480, 300 480, 120 420 Z"
-          fill="url(#mapFill)"
-          stroke="#1e3a8a"
-          strokeWidth="2"
-          strokeDasharray="8 8"
-          opacity="0.4"
+      
+      {/* Background Highway Night Atmosphere */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <img
+          src="/realistic-cab.jpg"
+          alt="Night Highway Background"
+          className="w-full h-full object-cover object-center filter brightness-[0.4] contrast-[1.2] blur-[2px] scale-105"
         />
 
-        {/* Rajasthan Highlight Boundary Region */}
-        <path
-          d="M 140 370 C 130 300, 180 200, 280 180 C 400 160, 480 200, 520 280 C 500 380, 340 400, 140 370 Z"
-          fill="#d97706"
-          fillOpacity="0.08"
-          stroke="#f59e0b"
-          strokeWidth="1.5"
-          strokeDasharray="4 4"
-          className="animate-pulse"
-        />
+        {/* Dynamic Road Lane Streaks Animation */}
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-950/90 via-slate-950/40 to-slate-950/90" />
+      </div>
 
-        {/* Region Tag */}
-        <text
-          x="280"
-          y="280"
-          fill="#f59e0b"
-          fontSize="14"
-          fontWeight="bold"
-          letterSpacing="4"
-          opacity="0.5"
-          className="uppercase tracking-widest font-mono select-none"
-        >
-          Rajasthan • India
-        </text>
+      {/* Center Cinematic Container */}
+      <div className="relative z-20 max-w-2xl w-full mx-4 space-y-6">
+        
+        {/* Glassmorphism Header HUD */}
+        <div className="bg-slate-950/90 backdrop-blur-xl p-6 sm:p-8 rounded-3xl border-2 border-amber-500/50 shadow-2xl text-white text-center space-y-4">
+          
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/20 border border-amber-500/40 text-amber-300 text-xs font-extrabold tracking-wider uppercase shadow-lg">
+            <Car className="w-4 h-4 text-amber-400 animate-pulse" />
+            <span>Live Highway Cab Journey • 24x7 Active</span>
+          </div>
 
-        {/* Glowing Saffron Route Path */}
-        <AnimatedRoute pathD={mainRoutePath} />
+          <div className="space-y-1">
+            <h2 className="text-2xl sm:text-4xl font-black text-white font-sans tracking-tight">
+              {CONFIG.BUSINESS_NAME_HI}
+            </h2>
+            <p className="text-xs sm:text-sm text-amber-400 font-bold tracking-wide">
+              {CONFIG.BUSINESS_NAME_EN} • {CONFIG.LOCATION}
+            </p>
+          </div>
 
-        {/* City Marker Nodes */}
-        {cities.map((city, idx) => (
-          <g key={idx} transform={`translate(${city.x}, ${city.y})`}>
-            {/* Outer Pulse */}
-            <circle
-              r={city.main ? "12" : "8"}
-              fill={city.main ? "#f59e0b" : "#38bdf8"}
-              opacity="0.3"
-              className="animate-ping"
-            />
-            {/* Inner Core */}
-            <circle
-              r={city.main ? "6" : "4"}
-              fill={city.main ? "#fbbf24" : "#38bdf8"}
-              stroke="#0f172a"
-              strokeWidth="2"
-              filter="url(#glowPin)"
-            />
-            {/* Label */}
-            <text
-              y={city.main ? "-14" : "18"}
-              x="0"
-              textAnchor="middle"
-              fill={city.main ? "#fef08a" : "#94a3b8"}
-              fontSize={city.main ? "13" : "11"}
-              fontWeight={city.main ? "bold" : "600"}
-              className="font-sans select-none drop-shadow-md"
-            >
-              {city.name}
-            </text>
-          </g>
-        ))}
+          {/* REAL MOVING CAR ON THE HIGHWAY ROAD visual viewport */}
+          <div className="mt-6 bg-slate-900/90 p-5 sm:p-6 rounded-2xl border border-slate-800 space-y-6 relative overflow-hidden shadow-inner">
+            
+            {/* Highway Road Asphalt Track */}
+            <div className="relative h-20 bg-slate-950 rounded-xl border border-slate-800 overflow-hidden flex items-center px-4">
+              
+              {/* Moving Lane Dashes */}
+              <div
+                className="absolute inset-0 flex items-center justify-between opacity-30"
+                style={{
+                  backgroundImage:
+                    "linear-gradient(90deg, #f59e0b 50%, transparent 50%)",
+                  backgroundSize: "40px 4px",
+                  backgroundRepeat: "repeat-x",
+                  backgroundPosition: `${progress * -400}px center`,
+                }}
+              />
 
-        {/* Foreign CSS Object-Path Moving Vehicle along SVG Route */}
-        <foreignObject
-          x="-30"
-          y="-15"
-          width="60"
-          height="30"
-          className="overflow-visible pointer-events-none"
-          style={{
-            offsetPath: `path("${mainRoutePath}")`,
-            offsetDistance: `${Math.min(100, Math.max(0, progress * 100))}%`,
-            offsetRotate: "auto",
-            transition: "offset-distance 0.05s linear",
-          }}
-        >
-          <AnimatedCar />
-        </foreignObject>
-      </svg>
+              {/* Milestone Markers */}
+              {milestones.map((m) => (
+                <div
+                  key={m.name}
+                  className="absolute flex flex-col items-center z-10 transition-all"
+                  style={{ left: `${m.pos}%` }}
+                >
+                  <div
+                    className={`w-2 h-2 rounded-full mb-1 ${
+                      progress * 100 >= m.pos
+                        ? "bg-amber-400 ring-4 ring-amber-500/30 scale-125"
+                        : "bg-slate-700"
+                    }`}
+                  />
+                  <span
+                    className={`text-[10px] font-bold ${
+                      progress * 100 >= m.pos ? "text-amber-300" : "text-slate-500"
+                    }`}
+                  >
+                    {m.name}
+                  </span>
+                </div>
+              ))}
+
+              {/* REAL MOVING CAR ON ROAD */}
+              <div
+                className="absolute top-1/2 -translate-y-1/2 z-20 flex items-center transition-all duration-75 pointer-events-none"
+                style={{ left: `calc(${Math.min(90, Math.max(5, progress * 88))}% - 28px)` }}
+              >
+                {/* Headlight Beam Cone */}
+                <div className="absolute left-10 top-1/2 -translate-y-1/2 w-28 h-12 bg-gradient-to-r from-amber-300/60 via-amber-400/20 to-transparent blur-md rounded-r-full pointer-events-none" />
+
+                {/* Real Moving Cab Card Visual */}
+                <div className="bg-gradient-to-r from-amber-500 to-amber-400 text-slate-950 px-3 py-1.5 rounded-xl shadow-xl border border-amber-300 flex items-center gap-1.5 animate-bounce">
+                  <Car className="w-5 h-5 fill-slate-950 stroke-[2.5]" />
+                  <span className="text-[11px] font-black tracking-wider uppercase whitespace-nowrap">
+                    CAB RJ-14
+                  </span>
+                </div>
+              </div>
+
+            </div>
+
+            {/* Live Progress Bar & Speed Status */}
+            <div className="flex items-center justify-between text-xs">
+              <span className="text-slate-300 font-semibold flex items-center gap-1.5">
+                <Navigation className="w-3.5 h-3.5 text-amber-400 animate-spin" />
+                <span>Highway Speed: <strong>80 KM/H</strong></span>
+              </span>
+              <span className="text-amber-400 font-mono font-black text-sm">
+                {percentage}% Completed
+              </span>
+            </div>
+
+            <div className="w-full h-2.5 bg-slate-800 rounded-full overflow-hidden p-0.5 border border-slate-700">
+              <div
+                className="h-full bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 rounded-full transition-all duration-75 shadow-md shadow-amber-500/50"
+                style={{ width: `${percentage}%` }}
+              />
+            </div>
+
+          </div>
+
+          {/* Badges */}
+          <div className="pt-2 flex flex-wrap items-center justify-center gap-4 text-slate-300 text-xs font-semibold">
+            <div className="flex items-center gap-1 text-emerald-400">
+              <ShieldCheck className="w-4 h-4" />
+              <span>Verified Driver Profile</span>
+            </div>
+            <div className="w-1 h-1 rounded-full bg-slate-600 hidden sm:block" />
+            <div className="flex items-center gap-1 text-amber-300">
+              <Sparkles className="w-4 h-4" />
+              <span>Maruti Dzire & Ertiga AC Cabs</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
     </div>
   );
 }
