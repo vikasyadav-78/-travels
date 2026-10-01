@@ -14,7 +14,7 @@ export default function Testimonials() {
     {
       name: "Neha S.",
       location: "Outstation Traveler",
-      text: "The pricing was easy to understand and the WhatsApp booking was convenient.",
+      text: "The pricing was easy to understand and the direct booking process was convenient.",
       rating: 5,
     },
     {
@@ -41,7 +41,7 @@ export default function Testimonials() {
               What Our Customers Say
             </h2>
             <p className="text-slate-600 text-sm">
-              Read demo feedback on direct QR cab booking experience.
+              Read feedback on our direct cab booking experience.
             </p>
           </div>
         </ScrollReveal>

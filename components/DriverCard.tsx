@@ -130,12 +130,6 @@ export default function DriverCard({ driver, vehicle }: DriverCardProps) {
               </span>
               <span className="font-bold text-amber-400">{driver.phone}</span>
             </div>
-            <div className="flex items-center justify-between py-1 border-b border-slate-800/60">
-              <span className="text-slate-400 flex items-center gap-1">
-                <MessageSquare className="w-3.5 h-3.5 text-emerald-400" /> WhatsApp:
-              </span>
-              <span className="font-bold text-emerald-400">+{driver.whatsapp}</span>
-            </div>
             <div className="flex items-center justify-between py-1">
               <span className="text-slate-400 flex items-center gap-1">
                 <Globe className="w-3.5 h-3.5 text-blue-400" /> Website:

@@ -14,7 +14,7 @@ import ScrollProgressBar from "@/components/ScrollProgressBar";
 import ScrollReveal from "@/components/ScrollReveal";
 import { DRIVERS } from "@/lib/data/drivers";
 import { VEHICLES } from "@/lib/data/vehicles";
-import { QrCode, ArrowLeft } from "lucide-react";
+import { ShieldCheck, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 
 interface DriverPageProps {
@@ -69,7 +69,7 @@ export default function DriverPage({ params }: DriverPageProps) {
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
               <div className="space-y-2">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100 border border-amber-300 text-amber-900 text-xs font-bold">
-                  <QrCode className="w-4 h-4 text-amber-600 animate-pulse" />
+                  <ShieldCheck className="w-4 h-4 text-amber-600 animate-pulse" />
                   <span>Driver-Specific Direct Booking Page</span>
                 </div>
                 <h1 className="text-3xl sm:text-4xl font-black text-slate-900">
@@ -113,7 +113,7 @@ export default function DriverPage({ params }: DriverPageProps) {
                 Calculate & Book Direct
               </h2>
               <p className="text-slate-600 text-xs sm:text-sm font-medium">
-                Instant fare estimation and WhatsApp lead submission
+                Instant fare estimation and direct booking request submission
               </p>
             </div>
           </ScrollReveal>

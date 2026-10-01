@@ -10,10 +10,6 @@ interface DriverProfileProps {
 }
 
 export default function DriverProfile({ driver }: DriverProfileProps) {
-  const whatsappUrl = `https://wa.me/${driver.whatsapp}?text=${encodeURIComponent(
-    `Hello ${driver.name}, I scanned your Shri Kabariya Balaji Travels card and want to inquire about a cab ride.`
-  )}`;
-
   return (
     <ScrollReveal animation="fade-up" delay={150}>
       <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-xl text-slate-900 relative overflow-hidden group card-hover-effect">
@@ -99,20 +95,10 @@ export default function DriverProfile({ driver }: DriverProfileProps) {
             <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
               <a
                 href={`tel:${driver.phone}`}
-                className="flex-1 py-3 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm shadow-md flex items-center justify-center gap-2 active:scale-95 transition-all hover:scale-[1.02]"
+                className="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black text-sm shadow-md flex items-center justify-center gap-2 active:scale-95 transition-all hover:scale-[1.02]"
               >
-                <Phone className="w-4 h-4 text-amber-400" />
-                <span>Call Driver</span>
-              </a>
-
-              <a
-                href={whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex-1 py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm shadow-md flex items-center justify-center gap-2 active:scale-95 transition-all hover:scale-[1.02]"
-              >
-                <MessageSquare className="w-4 h-4" />
-                <span>WhatsApp Driver</span>
+                <Phone className="w-4 h-4 text-slate-950" />
+                <span>Call Driver Directly ({driver.phone})</span>
               </a>
             </div>
 

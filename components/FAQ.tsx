@@ -10,7 +10,7 @@ export default function FAQ() {
   const faqs = [
     {
       q: "How can I book a cab?",
-      a: "Scan the QR code on your driver's visiting card, select your preferred trip type (Per KM or Fixed Day), enter your pickup/drop details, and submit the booking request. You can send the lead directly on WhatsApp for instant confirmation.",
+      a: "Select your preferred trip type (Per KM or Fixed Day) on our website, enter your pickup/drop details, and submit the booking request. You can also call us directly for instant phone booking.",
     },
     {
       q: "What is the per-kilometre rate?",
@@ -30,7 +30,7 @@ export default function FAQ() {
     },
     {
       q: "Can I contact the driver directly?",
-      a: "Yes! Driver contact phone numbers and direct WhatsApp links are provided on the website profile for clear personal communication.",
+      a: "Yes! Driver contact phone numbers are provided on the website profile for clear personal call communication.",
     },
   ];
 

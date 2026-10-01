@@ -6,10 +6,6 @@ import { CONFIG } from "@/lib/config";
 import ScrollReveal from "@/components/ScrollReveal";
 
 export default function Footer() {
-  const whatsappUrl = `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent(
-    `Hello Shri Kabariya Balaji Travels, I want to book a cab.`
-  )}`;
-
   return (
     <footer className="bg-slate-950 text-slate-400 pt-16 pb-24 lg:pb-12 border-t border-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -42,7 +38,7 @@ export default function Footer() {
               </p>
 
               <p className="text-xs text-slate-400 leading-relaxed">
-                Direct cab booking platform for local and outstation rides. Scan driver QR code, check transparent per-KM pricing, and book directly via WhatsApp.
+                Direct cab booking platform for local and outstation rides. Check transparent per-KM pricing and submit direct booking requests online or by phone.
               </p>
 
               <div className="inline-flex items-center gap-2 text-xs font-semibold text-slate-300 bg-slate-900 px-3 py-1.5 rounded-lg border border-slate-800">
@@ -113,16 +109,7 @@ export default function Footer() {
                   className="flex items-center gap-2 text-amber-400 hover:underline font-bold"
                 >
                   <Phone className="w-3.5 h-3.5" />
-                  <span>{CONFIG.BUSINESS_PHONE}</span>
-                </a>
-                <a
-                  href={whatsappUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-emerald-400 hover:underline font-bold"
-                >
-                  <MessageSquare className="w-3.5 h-3.5" />
-                  <span>Chat on WhatsApp</span>
+                  <span>Call Us: {CONFIG.BUSINESS_PHONE}</span>
                 </a>
                 <div className="flex items-center gap-2 text-slate-400">
                   <MapPin className="w-3.5 h-3.5 text-slate-500" />

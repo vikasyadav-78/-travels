@@ -1,7 +1,7 @@
 "use client";
 
-import { CheckCircle2, Phone, MessageSquare, RotateCcw, Calendar, MapPin, Clock, ShieldCheck } from "lucide-react";
-import { BookingPayload, openWhatsAppBooking } from "@/lib/whatsapp";
+import { CheckCircle2, Phone, RotateCcw, Calendar, MapPin, Clock, ShieldCheck } from "lucide-react";
+import { BookingPayload } from "@/lib/whatsapp";
 import { CONFIG } from "@/lib/config";
 
 interface BookingSuccessProps {
@@ -67,22 +67,14 @@ export default function BookingSuccess({ booking, onReset }: BookingSuccessProps
         </div>
       </div>
 
-      {/* Direct Contact Buttons */}
-      <div className="max-w-md mx-auto pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-        <button
-          onClick={() => openWhatsAppBooking(booking)}
-          className="flex-1 py-3.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm shadow-lg flex items-center justify-center gap-2 active:scale-95 transition-all"
-        >
-          <MessageSquare className="w-4 h-4" />
-          <span>WhatsApp Booking</span>
-        </button>
-
+      {/* Direct Contact Button */}
+      <div className="max-w-md mx-auto pt-2 flex items-center justify-center">
         <a
           href={`tel:${CONFIG.BUSINESS_PHONE}`}
-          className="flex-1 py-3.5 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-sm border border-slate-700 flex items-center justify-center gap-2 active:scale-95 transition-all"
+          className="w-full py-4 px-6 rounded-xl bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black text-base shadow-xl flex items-center justify-center gap-2.5 active:scale-95 transition-all"
         >
-          <Phone className="w-4 h-4 text-amber-400" />
-          <span>Call Us Now</span>
+          <Phone className="w-5 h-5" />
+          <span>Call Us Now Directly ({CONFIG.BUSINESS_PHONE})</span>
         </a>
       </div>
 

@@ -4,7 +4,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Shri Kabariya Balaji Travels | Direct Cab Booking",
   description:
-    "Book local and outstation cab services directly with Shri Kabariya Balaji Travels. View driver and vehicle details, check fare options and send a booking request through WhatsApp.",
+    "Book local and outstation cab services directly with Shri Kabariya Balaji Travels. View driver and vehicle details, check fare options and submit a direct booking request online.",
   keywords: [
     "Shri Kabariya Balaji Travels",
     "Cab Booking Jaipur",
@@ -13,12 +13,12 @@ export const metadata: Metadata = {
     "Taxi Booking Rajasthan",
     "Per KM Cab Rate",
     "Fixed Day Cab Package",
-    "QR Cab Booking"
+    "Direct Taxi Booking"
   ],
   openGraph: {
     title: "Shri Kabariya Balaji Travels | Direct Cab Booking",
     description:
-      "Book your next journey directly with Shri Kabariya Balaji Travels. Transparent fares, verified vehicle details and easy WhatsApp booking.",
+      "Book your next journey directly with Shri Kabariya Balaji Travels. Transparent fares, verified vehicle details and easy online booking.",
     url: "https://shrikabariyabalajitravels.com",
     siteName: "Shri Kabariya Balaji Travels",
     locale: "en_IN",

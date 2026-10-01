@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import TravelIntro from "@/components/TravelIntro";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import QRBooking from "@/components/QRBooking";
 import DriverProfile from "@/components/DriverProfile";
 import VehicleProfile from "@/components/VehicleProfile";
 import FareOptions from "@/components/FareOptions";
@@ -88,9 +87,6 @@ export default function Home() {
         onBookClick={() => openBookingModal()}
         onViewCarsClick={() => scrollToSection("cars")}
       />
-
-      {/* QR Code Concept Section */}
-      <QRBooking onBookClick={() => openBookingModal()} />
 
       {/* Driver & Car Details Section */}
       <section id="cars" className="py-20 bg-slate-50 relative">

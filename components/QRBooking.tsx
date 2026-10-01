@@ -43,7 +43,7 @@ export default function QRBooking({ onBookClick }: QRBookingProps) {
     {
       num: "05",
       title: "Confirm Booking",
-      desc: "Send pre-filled booking request directly to WhatsApp & Google Sheets in 1 click.",
+      desc: "Send booking request directly online or call driver in 1 click.",
       icon: CheckCircle,
       color: "from-amber-500 to-orange-600",
     },

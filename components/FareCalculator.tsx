@@ -111,6 +111,37 @@ export default function FareCalculator({
                   className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-amber-500"
                 />
 
+                {/* Popular Route Quick Chips */}
+                <div>
+                  <span className="text-[11px] font-extrabold text-slate-500 uppercase tracking-wider block mb-1.5">
+                    ⚡ Quick Pick Popular Routes (लोकप्रिय रूट):
+                  </span>
+                  <div className="flex flex-wrap gap-1.5">
+                    {[
+                      { label: "Jaipur ➔ Khatu Shyam (80 KM)", km: 80 },
+                      { label: "Jaipur ➔ Ajmer / Pushkar (135 KM)", km: 135 },
+                      { label: "Jaipur ➔ Salasar Balaji (170 KM)", km: 170 },
+                      { label: "Jaipur ➔ Delhi Airport (270 KM)", km: 270 },
+                    ].map((route) => (
+                      <button
+                        key={route.label}
+                        type="button"
+                        onClick={() => {
+                          setTripType("per_km");
+                          setDistanceKm(route.km);
+                        }}
+                        className={`text-xs px-2.5 py-1 rounded-lg border font-semibold transition-all ${
+                          distanceKm === route.km && tripType === "per_km"
+                            ? "bg-amber-500 text-slate-950 border-amber-400 font-bold shadow-xs scale-102"
+                            : "bg-white text-slate-700 border-slate-300 hover:bg-amber-50 hover:border-amber-300"
+                        }`}
+                      >
+                        📍 {route.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
                 {/* Rate Info Banner */}
                 <div className="p-3 rounded-xl bg-white border border-slate-200 flex items-center justify-between text-xs shadow-sm">
                   <span className="text-slate-500 font-medium">Rate Rule:</span>

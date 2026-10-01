@@ -17,7 +17,7 @@ import {
   Sparkles
 } from "lucide-react";
 import { TripType, calculateFare, FareCalculationResult } from "@/lib/fareCalculator";
-import { BookingPayload, openWhatsAppBooking } from "@/lib/whatsapp";
+import { BookingPayload } from "@/lib/whatsapp";
 import { submitBookingToGoogleSheets } from "@/lib/googleSheets";
 import BookingSuccess from "./BookingSuccess";
 import { Driver } from "@/lib/data/drivers";
@@ -365,6 +365,35 @@ export default function BookingForm({
                       <AlertCircle className="w-3 h-3" /> {errors.dropLocation}
                     </p>
                   )}
+                </div>
+
+                {/* Popular Route Quick Fill Chips */}
+                <div className="sm:col-span-2 bg-amber-50/60 p-3 rounded-xl border border-amber-200">
+                  <span className="text-[11px] font-extrabold text-amber-900 uppercase tracking-wider block mb-1.5">
+                    ⚡ Quick Fill Popular Routes (1-Click Auto Fill):
+                  </span>
+                  <div className="flex flex-wrap gap-1.5">
+                    {[
+                      { name: "Khatu Shyam Ji", pickup: "Jaipur City / Railway Station", drop: "Khatu Shyam Ji Temple", km: 80 },
+                      { name: "Salasar Balaji", pickup: "Jaipur City", drop: "Salasar Balaji Temple", km: 170 },
+                      { name: "Ajmer & Pushkar", pickup: "Jaipur City", drop: "Pushkar & Ajmer Dargah", km: 135 },
+                      { name: "Delhi Airport Drop", pickup: "Jaipur City", drop: "Delhi IGI Airport T3", km: 270 },
+                    ].map((route) => (
+                      <button
+                        key={route.name}
+                        type="button"
+                        onClick={() => {
+                          setPickupLocation(route.pickup);
+                          setDropLocation(route.drop);
+                          setDistanceKm(route.km);
+                          setTripType("per_km");
+                        }}
+                        className="text-xs px-2.5 py-1 rounded-lg bg-white hover:bg-amber-100 text-slate-800 hover:text-amber-900 border border-amber-300 font-semibold shadow-2xs transition-all hover:scale-102"
+                      >
+                        📍 {route.name}
+                      </button>
+                    ))}
+                  </div>
                 </div>
 
                 {/* Travel Date */}

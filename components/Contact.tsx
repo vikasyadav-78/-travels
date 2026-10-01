@@ -9,10 +9,6 @@ interface ContactProps {
 }
 
 export default function Contact({ onBookClick }: ContactProps) {
-  const whatsappUrl = `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent(
-    `Hello Shri Kabariya Balaji Travels, I would like to inquire about booking a cab.`
-  )}`;
-
   return (
     <section id="contact" className="py-20 bg-slate-50 text-slate-900 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -34,7 +30,7 @@ export default function Contact({ onBookClick }: ContactProps) {
 
             <ScrollReveal animation="fade-right" delay={200}>
               <p className="text-slate-600 text-base leading-relaxed">
-                Have an urgent pickup or want to ask about custom outstation routes? Call or WhatsApp us directly anytime.
+                Have an urgent pickup or want to ask about custom outstation routes? Call us directly anytime or fill out our quick booking request form.
               </p>
             </ScrollReveal>
 
@@ -51,25 +47,6 @@ export default function Contact({ onBookClick }: ContactProps) {
                       className="text-lg font-extrabold text-amber-700 hover:underline"
                     >
                       {CONFIG.BUSINESS_PHONE}
-                    </a>
-                  </div>
-                </div>
-              </ScrollReveal>
-
-              <ScrollReveal animation="fade-right" delay={400}>
-                <div className="p-4 rounded-2xl bg-white border border-slate-200 flex items-center gap-4 shadow-sm hover:border-emerald-400 transition-all hover:scale-[1.02]">
-                  <div className="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-600 shrink-0">
-                    <MessageSquare className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <span className="text-xs text-slate-500 font-medium block">WhatsApp Contact:</span>
-                    <a
-                      href={whatsappUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-lg font-extrabold text-emerald-700 hover:underline"
-                    >
-                      Chat on WhatsApp
                     </a>
                   </div>
                 </div>
@@ -119,7 +96,7 @@ export default function Contact({ onBookClick }: ContactProps) {
                     Ready To Book Your Ride?
                   </h3>
                   <p className="text-slate-300 text-sm max-w-md mx-auto">
-                    Fill out our quick 3-step booking form to compute your fare and send an instant WhatsApp booking request.
+                    Fill out our quick 3-step booking form to compute your fare and send an instant booking request.
                   </p>
                 </div>
 

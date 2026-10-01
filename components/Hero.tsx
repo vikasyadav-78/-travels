@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { Phone, ShieldCheck, Car, ChevronRight, CheckCircle2, QrCode, Star, Sparkles } from "lucide-react";
+import { Phone, ShieldCheck, Car, ChevronRight, CheckCircle2, Star, Sparkles } from "lucide-react";
 import { CONFIG } from "@/lib/config";
 import ScrollReveal from "@/components/ScrollReveal";
 
@@ -55,7 +55,7 @@ export default function Hero({ onBookClick, onViewCarsClick }: HeroProps) {
             {/* Supporting paragraph */}
             <ScrollReveal animation="fade-up" delay={400} duration={700}>
               <p className="text-slate-600 text-base sm:text-lg max-w-2xl leading-relaxed">
-                Transparent fares, driver & vehicle details available before you book, and instant direct confirmation via WhatsApp. No middleman charges.
+                Transparent fares, driver & vehicle details available before you book, and instant direct confirmation. No middleman charges.
               </p>
             </ScrollReveal>
 
@@ -174,13 +174,13 @@ export default function Hero({ onBookClick, onViewCarsClick }: HeroProps) {
                   </div>
                 </div>
 
-                {/* QR Mini Banner */}
+                {/* Direct Connection Mini Banner */}
                 <div className="mt-4 p-3 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-between transition-transform group-hover:translate-x-1">
                   <div className="flex items-center gap-2.5">
-                    <QrCode className="w-6 h-6 text-amber-600 animate-bounce" />
+                    <ShieldCheck className="w-6 h-6 text-amber-600 animate-bounce" />
                     <span className="text-xs font-medium text-slate-700">
-                      Scanned Driver QR Card? <br />
-                      <strong className="text-slate-900 font-bold">Direct Cab Booking Active</strong>
+                      Direct Driver Connection <br />
+                      <strong className="text-slate-900 font-bold">Zero Commission Markups</strong>
                     </span>
                   </div>
                   <span className="text-[11px] font-bold text-amber-700 bg-amber-100 px-2 py-1 rounded uppercase tracking-wider">

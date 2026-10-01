@@ -1,6 +1,6 @@
 "use client";
 
-import { ShieldCheck, UserCheck, Calculator, MessageSquare, PhoneCall, FileText } from "lucide-react";
+import { ShieldCheck, UserCheck, Calculator, CheckCircle2, PhoneCall, FileText } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 
 export default function WhyChooseUs() {
@@ -31,9 +31,9 @@ export default function WhyChooseUs() {
       desc: "Fill in your pickup, drop, and travel details in a simple mobile-optimized online booking request form.",
     },
     {
-      icon: MessageSquare,
-      title: "Instant WhatsApp Confirmation",
-      desc: "Receive pre-filled booking details directly on WhatsApp for fast turnarounds and direct driver chat.",
+      icon: CheckCircle2,
+      title: "Instant Booking Confirmation",
+      desc: "Submit your booking request online or call directly for quick turnarounds and direct driver confirmation.",
     },
   ];
 

@@ -19,7 +19,7 @@ import {
 } from "lucide-react";
 import { CONFIG } from "@/lib/config";
 import { TripType, calculateFare, FareCalculationResult } from "@/lib/fareCalculator";
-import { BookingPayload, openWhatsAppBooking } from "@/lib/whatsapp";
+import { BookingPayload } from "@/lib/whatsapp";
 import { submitBookingToGoogleSheets } from "@/lib/googleSheets";
 import { DEFAULT_DRIVER } from "@/lib/data/drivers";
 import { DEFAULT_VEHICLE } from "@/lib/data/vehicles";

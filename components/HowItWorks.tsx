@@ -1,21 +1,21 @@
 "use client";
 
-import { QrCode, Navigation, FileCheck, Send, CheckCircle2 } from "lucide-react";
+import { Calculator, Navigation, FileCheck, Send, CheckCircle2 } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 
 export default function HowItWorks() {
   const steps = [
     {
       step: "01",
-      title: "Scan QR",
-      desc: "Scan QR code on visiting card or visit website link.",
-      icon: QrCode,
+      title: "Choose Trip Package",
+      desc: "Select Per KM rate or Fixed Day package option.",
+      icon: Navigation,
     },
     {
       step: "02",
-      title: "Choose Trip",
-      desc: "Select Per KM rate or Fixed Day package option.",
-      icon: Navigation,
+      title: "Estimate Your Fare",
+      desc: "Use live calculator to preview instant rate & fare breakdown.",
+      icon: Calculator,
     },
     {
       step: "03",
@@ -25,8 +25,8 @@ export default function HowItWorks() {
     },
     {
       step: "04",
-      title: "Send Request",
-      desc: "Submit lead instantly to WhatsApp & Google Sheets.",
+      title: "Send Booking Request",
+      desc: "Submit lead online or call directly for quick booking.",
       icon: Send,
     },
   ];

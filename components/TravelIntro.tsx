@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import TravelMap from "./TravelMap";
 import { CONFIG } from "@/lib/config";
-import { ChevronRight, QrCode, Sparkles } from "lucide-react";
+import { ChevronRight, Sparkles } from "lucide-react";
 
 interface TravelIntroProps {
   onComplete: () => void;

@@ -30,7 +30,7 @@ export default function AboutBusiness() {
 
             <ScrollReveal animation="fade-right" delay={300}>
               <p className="text-slate-600 text-base leading-relaxed">
-                Instead of paying commission markups on third-party marketplace apps, scan our driver's visiting card QR code, verify vehicle and driver details directly on your phone, calculate your estimated fare, and send a direct booking request via WhatsApp.
+                Instead of paying commission markups on third-party marketplace apps, verify vehicle and driver details directly on your phone, calculate your estimated fare, and send a direct booking request online or call directly.
               </p>
             </ScrollReveal>
 
@@ -77,7 +77,7 @@ export default function AboutBusiness() {
                     </div>
                     <div className="flex items-center justify-between">
                       <span>Booking Mode:</span>
-                      <span className="font-bold text-amber-700">Direct QR & WhatsApp</span>
+                      <span className="font-bold text-amber-700">Direct Website & Phone Call</span>
                     </div>
                   </div>
                 </div>
